@@ -5,6 +5,7 @@ const deleteButton = document.querySelector('[data-delete]')
 const allClearButton = document.querySelector('[data-all-clear]')
 const previousOperandTextElement = document.querySelector('[data-previous-operand]')
 const currentOperandTextElement = document.querySelector('[data-current-operand]')
+const negative = document.querySelector("#neg")
 
 class Calculator {
   constructor(previousOperandTextElement, currentOperandTextElement) {
@@ -29,13 +30,20 @@ class Calculator {
   }
 
   chooseOperation(operation) {
-        if(this.currentOperand==="") return
+        if(this.currentOperand==="" && operation ==="-"){this.appendNumber("-")}
+        else{
+          if(this.currentOperand==="" && operation !== '-') return
         if(this.previousOperand !== ""){
             this.compute()
         }
+       
+        
         this.operation = operation
         this.previousOperand = this.currentOperand
-        this.currentOperand = ""
+        this.currentOperand =''
+        
+        }
+        
     }
 
   compute() {
@@ -108,11 +116,13 @@ numberButtons.forEach(button => {
 
 operationButtons.forEach(button => {
     button.addEventListener('click', () => {
-      calculator.appendNumber(button.innerText)
       calculator.chooseOperation(button.innerText)
       calculator.updateDisplay()
     })
   })
+
+  
+  
 
   equalsButton.addEventListener('click', button =>{
       calculator.compute()
