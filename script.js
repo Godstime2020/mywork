@@ -108,6 +108,7 @@ numberButtons.forEach(button => {
 
 operationButtons.forEach(button => {
     button.addEventListener('click', () => {
+      calculator.appendNumber(button.innerText)
       calculator.chooseOperation(button.innerText)
       calculator.updateDisplay()
     })
